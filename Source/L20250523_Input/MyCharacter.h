@@ -6,6 +6,11 @@
 #include "GameFramework/Character.h"
 #include "MyCharacter.generated.h"
 
+
+class UCameraComponent;
+class USpringArmComponent;
+
+
 UCLASS()
 class L20250523_INPUT_API AMyCharacter : public ACharacter
 {
@@ -25,5 +30,12 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	UPROPERTY(VisibleAnywhere, Category="Components", BlueprintReadOnly)
+	TObjectPtr<USpringArmComponent> CameraBoom;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components", BlueprintReadOnly)
+	TObjectPtr<UCameraComponent> Camera;
+
 
 };
