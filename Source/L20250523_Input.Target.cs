@@ -8,8 +8,9 @@ public class L20250523_InputTarget : TargetRules
 	public L20250523_InputTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-		DefaultBuildSettings = BuildSettingsVersion.V5;
+		DefaultBuildSettings = BuildSettingsVersion.Latest;
+        IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 
-		ExtraModuleNames.AddRange( new string[] { "L20250523_Input" } );
+        ExtraModuleNames.AddRange( new string[] { "L20250523_Input" } );
 	}
 }

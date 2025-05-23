@@ -9,6 +9,8 @@
 
 class UCameraComponent;
 class USpringArmComponent;
+class UInputMappingContext;
+class UInputAction;
 
 
 UCLASS()
@@ -37,5 +39,19 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Components", BlueprintReadOnly)
 	TObjectPtr<UCameraComponent> Camera;
 
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<UInputAction> IA_Jump;
 
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<UInputAction> IA_Move;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<UInputAction> IA_Look;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<UInputAction> IA_Zoom;
+
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<UInputMappingContext> IMC_Default;
 };
