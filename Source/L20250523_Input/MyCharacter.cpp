@@ -31,6 +31,22 @@ AMyCharacter::AMyCharacter()
 void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	APlayerController* PC = Cast<APlayerController>(Controller);
+
+	if (PC)
+	{
+		if (ULocalPlayer* LocalPlayer = Cast<ULocalPlayer>(PC->Player))
+		{
+			if (UEnhancedInputLocalPlayerSubsystem* InputSystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
+			{
+				if (IMC_Default)
+				{
+					InputSystem->AddMappingContext(IMC_Default, 0);
+				}
+			}
+		}
+	}
 	
 }
 
@@ -49,7 +65,33 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	UEnhancedInputComponent* UEIC = Cast<UEnhancedInputComponent>(PlayerInputComponent);
 	if (UEIC)
 	{
-		//UEIC->BindAction()
+		UEIC->BindAction(IA_Move, ETriggerEvent::Triggered, this, &AMyCharacter::Move);
+
+		UEIC->BindAction(IA_Jump, ETriggerEvent::Triggered, this, &AMyCharacter::Jump);
+
+		UEIC->BindAction(IA_Jump, ETriggerEvent::Canceled, this, &AMyCharacter::StopJumping);
+
+		UEIC->BindAction(IA_Look, ETriggerEvent::Completed, this, &AMyCharacter::Look);
 	}
+}
+
+void AMyCharacter::Move(const FInputActionValue& Value)
+{
+	FVector2D MoveVector = Value.Get<FVector2D>();
+
+	AddMovementInput(GetActorForwardVector(), MoveVector.X);
+	AddMovementInput(GetActorRightVector(), MoveVector.Y);
+}
+
+void AMyCharacter::Look(const FInputActionValue& Value)
+{
+	FVector2D LookVector = Value.Get<FVector2D>();
+
+}
+
+void AMyCharacter::Zoom(const FInputActionValue& Value)
+{
+	float ZoomValue = Value.Get<float>();
+
 }
 
